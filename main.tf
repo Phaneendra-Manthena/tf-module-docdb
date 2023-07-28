@@ -1,16 +1,16 @@
 resource "aws_docdb_subnet_group" "default" {
-  name       = "${var.env}-docbd-subnet-group"
+  name       = "${var.env}-docdb-subnet-group"
   subnet_ids = var.subnet_ids
   tags = merge(
     local.common_tags,
-    { Name = "${var.env}-docbd-subnet-group" }
+    { Name = "${var.env}-docdb-subnet-group" }
   )
 
 }
 
 resource "aws_security_group" "docdb" {
-  name        = "${var.env}-docbd-security-group"
-  description = "${var.env}-docbd-security-group"
+  name        = "${var.env}-docdb-security-group"
+  description = "${var.env}-docdb-security-group"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -31,7 +31,7 @@ resource "aws_security_group" "docdb" {
   }
   tags = merge(
     local.common_tags,
-    { Name = "${var.env}-docbd-security-group" }
+    { Name = "${var.env}-docdb-security-group" }
 )
     }
 
