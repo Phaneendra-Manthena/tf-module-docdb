@@ -33,5 +33,20 @@ resource "aws_security_group" "docdb" {
     local.common_tags,
     { Name = "${var.env}-docdb-security-group" }
 )
-    }
+}
 
+resource "aws_docdb_cluster" "docdb" {
+  cluster_identifier      = "${var.env}-docdb-cluster"
+  engine                  = "docdb"
+  master_username         = "foo"
+  master_password         = "mustbeeightchars"
+#  backup_retention_period = 5
+#  preferred_backup_window = "07:00-09:00"
+  skip_final_snapshot     = true
+  db_subnet_group_name    = aws_docdb_subnet_group.default.name
+  vpc_security_group_ids  = [aws_security_group.docdb.id]
+tags = merge(
+    local.common_tags,
+    { Name = "${var.env}-docdb-cluster" }
+  )
+}
