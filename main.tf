@@ -32,4 +32,6 @@ resource "aws_security_group" "docdb" {
   tags = merge(
     local.common_tags,
     { Name = "${var.env}-docbd-security-group" }
-}
+)
+    }
+
